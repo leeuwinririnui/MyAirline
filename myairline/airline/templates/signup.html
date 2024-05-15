@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="signup_container">
+    <h2>Sign Up</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required>
+        <label for="first_name">First Name</label>
+        <input type="text" id="first_name" name="first_name" required>
+        <label for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="last_name" required>
+        <label for="gender">Gender</label>
+        <select id="gender" name="gender">
+            <option value="male">M</option>
+            <option value="female">F</option>
+        </select>
+        <label for="title">Title</label>
+        <select id="title" name="title">
+            <option value="Mr">Mr</option>
+            <option value="Mrs">Mrs</option>
+            <option value="Ms">Ms</option>
+            <option value="Miss">Miss</option>
+        </select>
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+        <label for="confirm">Confirm Password</label>
+        <input type="password" id="confirm" name="confirm" required>
+        <input type="submit" value="Sign Up">
+    </form>
+    <h3>Already have an account? <a href="/login">Login</a></h3>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div id="popLogout" class="popup">
+    <div>
+        <p>Are you sure you want to logout?</p>
+    </div>
+    <form class="buttons" method="POST">
+        {% csrf_token %}
+        <button id="confirmButton" type="submit" name="confirmLogout">Yes</button>
+        <button id="cancelButton" type="button" onclick="history.back()">No</button>
+    </form>
+</div>
+{% endblock %}

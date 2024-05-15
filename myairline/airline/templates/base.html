@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset ="UFT-8">
+        <meta name="viewport" content="width=device-width", initial-scale="1.0">
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+        <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+        <script src="{% static 'script.js' %}"></script>
+
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+        <title>{% block title %}Home{% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <div class="container">
+                <!-- navabar for navigating website-->
+                <nav class="navbar">
+                    <ul class="navbar-list">
+                        <li class="navelement"><a href ="/">Home</a></li>
+                        <li class="navelement"><a href ="/flights">Flights</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="navelement"><a href ="/profile">Profile</a></li>
+                        {% endif %}
+                        <li class="dropdown">
+                            <a href ="#">Account</a>
+                            <div class="dropdown-content">
+                                {% if user.is_authenticated %}
+                                <a href="/bookings">Bookings</a>
+                                <a href="/logout">Logout</a>
+                                {% else %}
+                                <a href="/signup">Signup</a>
+                                <a href="/login">Login</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+        <footer>
+
+        </footer>
+    </body>
+</html>
