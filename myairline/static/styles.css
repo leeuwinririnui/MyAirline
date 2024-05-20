@@ -111,7 +111,9 @@ nav a {
 
 /* signup and login container CSS */
 
-.signup_container, .login_container {
+.signup_container, 
+.login_container,
+.flight_container {
     font-family:'roboto', sans-serif;
     width: 400px;
     margin: 50px auto;
@@ -121,22 +123,27 @@ nav a {
     border: 2px solid #CCCCCC;
 }
 
-.signup_container h2, .login_container h2 {
+.signup_container h2, .login_container h2, .flight_container h2 {
     font-size: 32px;
     text-align: center;
     margin-bottom: 30px;
 }
 
-.signup_container form, .login_container form {
+.signup_container form, .login_container form, .flight_container form {
     font-size: 18px;
     display: flex;
     flex-direction: column;
 }
-.signup_container label, .login_container label{
+.signup_container label, .login_container label, .flight_container label {
     margin-bottom: 6px;
 }
 
-.signup_container input, .login_container input, .signup_container select {
+.signup_container input, 
+.login_container input, 
+.signup_container select,
+.flight_container select,
+.flight_container input,
+.flight_container button {
     margin-bottom: 32px;
     padding: 12px;
     border: 2px solid #CCCCCC;
@@ -144,11 +151,16 @@ nav a {
     font-size: 18px;
 }
 
-.signup_container input:hover, .login_container input:hover, .signup_container select:hover {
+.signup_container input:hover, 
+.login_container input:hover, 
+.signup_container select:hover,
+.flight_container select:hover  {
     border: 2px solid #008DDA;
 }
 
-.signup_container input[type="submit"], .login_container input[type="submit"] {
+.signup_container input[type="submit"], 
+.login_container input[type="submit"],
+.flight_container button[type="button"] {
     margin-top: 25px;
     background-color: #008DDA;
     padding: 16px;
@@ -156,7 +168,9 @@ nav a {
     font-size: 18px;
 }
 
-.signup_container input[type="submit"]:hover, .login_container input[type="submit"]:hover {
+.signup_container input[type="submit"]:hover, 
+.login_container input[type="submit"]:hover,
+.flight_container button[type="button"]:hover {
     background-color: #0078b3;
 }
 
@@ -221,46 +235,39 @@ nav a {
     background-color: #c6172b;
 }
 
-/* search bar css */
-/* main content */
-.search {
-    width: max-content;
+/* CSS for the flight card container */
+.flight-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 14px;
-    border-radius: 28px;
-    background: #f6f6f6;
-    margin: 25px auto;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.75);
 }
 
-.search-input {
-    font-size: 22px;
-    font-family: 'Lexend', sans-serif;
-    color: #333333;
-    margin-left: 14px;
+/* CSS for the flight details */
+.flight-card p {
+    margin: 5px 0;
+    font-size: 18px;
+}
+
+/* CSS for the book flight button */
+.book-flight-button {
+    background-color: #007bff;
+    color: #fff;
     border: none;
-    background: transparent;
-    flex: 1;
-    outline: none;
-    width: 500px;
+    border-radius: 4px;
+    padding: 8px 16px; /* Adjust padding to make the button smaller */
+    cursor: pointer;
+    font-size: 14px; /* Adjust font size */
+    transition: background-color 0.3s ease;
 }
 
-.search-icon {
-    transform: scale(1.2);
+.book-flight-button:hover {
+    background-color: #0056b3;
 }
 
-.search-input::placeholder,
-.search-icon {
-    color: rgba(0, 0, 0, 0.5);
-}
 
-/* DatePicker */
-#datepicker {
-    margin-left: 5px;
-    font-size: 16px;
-}
 
-#datepicker:focus {
-    outline: none;
-}

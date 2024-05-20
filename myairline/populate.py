@@ -248,7 +248,7 @@ def dairy_flat_to_tuuta():
     tuuta = Airport.objects.get(iCAO='NZCI')
 
     # get plane
-    plane = Plane.objects.get(name="Honda Elite 1")
+    plane = Plane.objects.get(name="HondaJet Elite 1")
 
     # define flight details
     outbound_flight_number = 'HE01'
@@ -313,7 +313,7 @@ def dairy_flat_to_tuuta():
 
 def dairy_flat_to_tekapo():
     # get plane
-    plane = Plane.objects.get(name="Honda Elite 2")
+    plane = Plane.objects.get(name="HondaJet Elite 2")
 
     # define flight details
     outbound_flight_number = 'HE03'

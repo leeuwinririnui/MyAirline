@@ -3,11 +3,39 @@
 {% block title %}Flights{% endblock %}
 
 {% block content %}
-    <form method="POST">
-        <div class="search">
-            <span class="search-icon material-symbols-outlined">search</span>
-            <input class="search-input" type="search" placeholder="search">
-            <input type="text" id="datepicker" placeholder="Select date">
-        </div>
+
+<div class="flight_container">
+    <h2>Flights</h2>
+    <form method="GET" id="flight_search_form">
+        <label for="origin">Origin</label>
+            <select id="origin" name="origin">
+                <option value="NZNE">Dairy Flat</option>
+                <option value="YSSY">Sydney</option>
+                <option value="NZRO">Rotorua</option>
+                <option value="NZGB">Great Barrier</option>
+                <option value="NZCI">Chatham Islands</option>
+                <option value="NZTI">Lake Tekapo</option>
+            </select>
+
+        <label for="destination">Destination</label>
+            <select id="destination" name="destination">
+                <option value="NZNE">Dairy Flat</option>
+                <option value="YSSY">Sydney</option>
+                <option value="NZRO">Rotorua</option>
+                <option value="NZGB">Great Barrier</option>
+                <option value="NZCI">Chatham Islands</option>
+                <option value="NZTI">Lake Tekapo</option>
+            </select>
+        <!-- Date Picker -->
+        <label for="departure_date">Departure Date</label>
+        <input type="date" id="departure_date" name="departure_date">
+
+        <button type="button" id="search_button">Search</button>
     </form>
+    </div>
+    <div class="flight_list" id="flight_list">
+        <!-- Flight data will be dynamically inserted here -->
+    </div>
+</div>
+
 {% endblock %}

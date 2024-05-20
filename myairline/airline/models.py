@@ -33,8 +33,6 @@ class Airport(models.Model):
     name = models.CharField(max_length=64)
     # airport location
     location = models.CharField(max_length=64)
-    # timezone of airport location
-    timezone = models.CharField(max_length=9)
     # airport location
     country = models.CharField(max_length=128)
 
