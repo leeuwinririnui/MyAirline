@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card mt-5">
+        <div class="card-header bg-dark text-white">
+            <h2 class="mb-0" style="font-size: 24px;">Booking Confirmed!</h2>
+        </div>
+        <div class="card-body">
+            {% if latest_booking %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Customer Details</h4>
+                        <p><strong>Name:</strong> {{ latest_booking.user.title }} {{ latest_booking.user.first_name }} {{ latest_booking.user.last_name }}</p>
+                        <p><strong>Email:</strong> {{ latest_booking.user.email }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Flight Details</h4>
+                        <p><strong>Flight Number:</strong> {{ latest_booking.flight.flight_number }}</p>
+                        <p><strong>Origin:</strong> {{ latest_booking.flight.outbound.name }}</p>
+                        <p><strong>Destination:</strong> {{ latest_booking.flight.destination.name }}</p>
+                        <p><strong>Departure Time:</strong> {{ latest_booking.flight.departure_time }}</p>
+                        <p><strong>Arrival Time:</strong> {{ latest_booking.flight.arrival_time }}</p>
+                    </div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <h4>Booking Details</h4>
+                        <p><strong>Booking Reference:</strong> {{ latest_booking.booking_reference }}</p>
+                        <p><strong>Price:</strong> ${{ latest_booking.flight.price }}</p>
+                    </div>
+                </div>
+            {% else %}
+                <p>No bookings found.</p>
+            {% endif %}
+        </div>
+        <div class="card-footer">
+            <input type="button" value="Okay" onclick="redirectToHomePage()" class="btn btn-primary">
+        </div>
+    </div>
+</div>
+{% endblock %}

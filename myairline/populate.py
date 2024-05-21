@@ -147,7 +147,7 @@ def dairy_flat_to_rotorua():
         # create two flights for mid morning and evening
         for _ in range(2):
             departure_time = tz_auckland.localize(datetime.combine(date, time(8, 0))) if _ == 0 else tz_auckland.localize(datetime.combine(date, time(18, 0)))
-            arrival_time = departure_time + timedelta(minutes=50)
+            arrival_time = departure_time + timedelta(minutes=45)
             arrival_time = arrival_time.astimezone(tz_auckland)
 
             Flight.objects.create(
@@ -198,7 +198,7 @@ def dairy_flat_to_great_barrier():
     # populate outbound flights
     for date in outbound_dates:
         departure_time = tz_auckland.localize(datetime.combine(date, time(8, 00))) 
-        arrival_time = departure_time + timedelta(minutes=40)
+        arrival_time = departure_time + timedelta(minutes=30)
         arrival_time = arrival_time.astimezone(tz_auckland)
 
         Flight.objects.create(
@@ -215,7 +215,7 @@ def dairy_flat_to_great_barrier():
     # populate inbound flights
     for date in inbound_dates:
         departure_time = tz_auckland.localize(datetime.combine(date, time(7, 30))) 
-        arrival_time = departure_time + timedelta(minutes=40)
+        arrival_time = departure_time + timedelta(minutes=30)
         arrival_time = arrival_time.astimezone(tz_auckland)
 
         Flight.objects.create(
@@ -374,6 +374,7 @@ def dairy_flat_to_tekapo():
 
 
 def main():
+    # run all functions to populate database with flights
     dairy_flat_to_sydney()
 
     dairy_flat_to_rotorua()

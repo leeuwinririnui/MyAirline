@@ -3,14 +3,25 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-<div id="popLogout" class="popup">
-    <div>
-        <p>Are you sure you want to logout?</p>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div id="popLogout" class="popup">
+                        <div class="text-center">
+                            <p class="mb-4 h4">Are you sure you want to logout?</p>
+                        </div>
+                        <form class="d-flex justify-content-center" method="POST">
+                            {% csrf_token %}
+                            <button id="confirmButton" type="submit" name="confirmLogout" class="btn btn-danger btn-lg mr-2">Yes</button>
+                            <button id="cancelButton" type="button" onclick="history.back()" class="btn btn-secondary btn-lg">No</button>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <form class="buttons" method="POST">
-        {% csrf_token %}
-        <button id="confirmButton" type="submit" name="confirmLogout">Yes</button>
-        <button id="cancelButton" type="button" onclick="history.back()">No</button>
-    </form>
 </div>
 {% endblock %}

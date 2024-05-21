@@ -3,6 +3,39 @@
 {% block title %}Bookings{% endblock %}
 
 {% block content %}
-    <h1>Welcome to our website!</h1>
-    <p>This is the bookings page content.</p>
+<div class="container my-5">
+    <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+            <h2 class="mb-0" style="font-size: 24px;">Your Bookings</h2>
+        </div>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                {% for booking in user_bookings %}
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <form method="POST" class="d-inline-block" onsubmit="return confirm('Are you sure you want to cancel this booking?');">
+                                    {% csrf_token %}
+                                    <p><strong>Booking Reference:</strong> {{ booking.booking_reference }}</p>
+                                    <p><strong>Flight:</strong> {{ booking.flight.flight_number }}</p>
+                                    <p><strong>Origin:</strong> {{ booking.flight.outbound.name }}</p>
+                                    <p><strong>Destination:</strong> {{ booking.flight.destination.name }}</p>
+                                    <input type="hidden" name="booking_reference" value="{{ booking.booking_reference }}">
+                                    <button type="submit" class="btn btn-danger mt-3">Cancel</button>
+                                </form>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Departure Time:</strong> {{ booking.flight.departure_time }}</p>
+                                <p><strong>Arrival Time:</strong> {{ booking.flight.arrival_time }}</p>
+                                <p><strong>Price:</strong> ${{ booking.flight.price }}</p>
+                            </div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <li class="list-group-item">No bookings found.</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock %}

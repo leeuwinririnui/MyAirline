@@ -1,10 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+import hashlib
+import random
+
+# function to generate unique reference between 100 and 999
+def generate_unique_reference():
+    # used for booking reference
+    return str(random.randint(100, 999))
 
 # extend Djangos built in User model
 class CustomUser(AbstractUser):
-    # fields
-
     # title
     title = models.CharField(max_length=4, blank=False);
     # gender
@@ -17,8 +22,6 @@ class CustomUser(AbstractUser):
     first_name = models.CharField(max_length=64, blank=False)
     # users last name
     last_name = models.CharField(max_length=64, blank=False)
-    # flights user has booked
-    flights = models.ManyToManyField('Flight', blank=True, related_name='passengers')
 
     # define the required fields when creating a new user
     REQUIRED_FIELDS = ['email', 'first_name', 'last_name']
@@ -55,7 +58,6 @@ class Airport(models.Model):
     def get_country(self):
         return self.country
 
-
 # model for various flights
 class Flight(models.Model):
     # flight number - 4 character code
@@ -79,14 +81,31 @@ class Flight(models.Model):
     seats = models.IntegerField()
     # price of flight
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    # Unique code field
+    unique_code = models.CharField(max_length=128, blank=True, null=True, unique=True)
 
+    def save(self, *args, **kwargs):
+        # generate the unique code before saving
+        if not self.unique_code:
+            self.unique_code = self.generate_unique_code()
+        super().save(*args, **kwargs)
+
+    # function to generate unique code
+    def generate_unique_code(self):
+            # concantenate flight details to create a unique string
+            details_str = f"{self.flight_number}-{self.outbound.iCAO}-{self.destination.iCAO}-{self.departure_time}-{self.arrival_time}"
+
+            # Hash the concatenated string to generate a unique code
+            unique_code = hashlib.sha256(details_str.encode()).hexdigest()
+
+            return unique_code
+            
     # order flights by date
     class Meta:
         ordering = ['departure_time']
 
     def __str__(self):
         return f"{self.outbound} to {self.destination} on {self.departure_time.date()}"
-    
     
 # model for various planes
 class Plane(models.Model):
@@ -108,4 +127,27 @@ class Plane(models.Model):
     
     def get_capacity(self):
         return self.capacity
+    
+# model for unique booking reference assigned to each user when flight has been booked
+class Booking(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='bookings')
+    flight = models.ForeignKey(Flight, on_delete=models.CASCADE, related_name='bookings')
+    booking_reference = models.CharField(max_length=12, unique=True)
+
+    def save(self, *args, **kwargs):
+        # check if booking reference exists
+        if not self.booking_reference:
+            # generate a unique reference number
+            while True:
+                flight_number = self.flight.flight_number
+                unique_reference = generate_unique_reference()
+                booking_reference = f"{flight_number}-{unique_reference}"
+                # check if generated reference is unique
+                if not Booking.objects.filter(booking_reference=booking_reference).exists():
+                    self.booking_reference = booking_reference
+                    break
+        # save unique booking reference
+        super().save(*args, **kwargs)
+    
+
     

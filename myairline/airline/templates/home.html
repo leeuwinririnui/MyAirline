@@ -1,12 +1,54 @@
 {% extends "base.html" %}
-
+{% load static %}
 {% block title %}Home{% endblock %}
 
 {% block content %}
 {% if user.is_authenticated %}
-    <h1>Welcome {{ user.first_name}}!</h1>
+    <h1>Welcome {{ user.first_name }}!</h1>
 {% else %}
     <h1>Welcome to our website!</h1>
 {% endif %} 
 <p>This is the home page content.</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="destination-photo">
+                <img src="{% static 'images/sydney.jpg' %}" alt="Destination 1" class="img-fluid">
+                <div class="destination-label">Destination 1</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="destination-photo">
+                <img src="{% static 'images/rotorua.jpg' %}" alt="Destination 2" class="img-fluid">
+                <div class="destination-label">Destination 2</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="destination-photo">
+                <img src="destination3.jpg" alt="Destination 3" class="img-fluid">
+                <div class="destination-label">Destination 3</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="destination-photo">
+                <img src="destination4.jpg" alt="Destination 4" class="img-fluid">
+                <div class="destination-label">Destination 4</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="destination-photo">
+                <img src="destination5.jpg" alt="Destination 5" class="img-fluid">
+                <div class="destination-label">Destination 5</div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="destination-photo">
+                <img src="destination6.jpg" alt="Destination 6" class="img-fluid">
+                <div class="destination-label">Destination 6</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

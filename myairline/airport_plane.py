@@ -36,6 +36,7 @@ def populate_planes():
         plane.save()
 
 def main():
+    # run all functions to populate database with planes and airports
     populate_airports()
 
     populate_planes()
