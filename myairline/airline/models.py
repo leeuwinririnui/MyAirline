@@ -62,11 +62,6 @@ class Airport(models.Model):
 class Flight(models.Model):
     # flight number - 4 character code
     flight_number = models.CharField(max_length=4)
-
-    # airports associated with flights
-    # CASCADE - all associated 'Flight' instances will also be deleted
-    # related name - allows for access to flights related to aiport instance
-
     # outbound point
     outbound = models.ForeignKey(Airport, on_delete=models.CASCADE, related_name='outbound_flight') 
     # destination point

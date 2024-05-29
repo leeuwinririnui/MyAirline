@@ -101,3 +101,11 @@ function getCookie(name) {
 function redirectToHomePage() {
     window.location.href = "/";
 }
+
+// function to hide error messages after 5 seconds
+setTimeout(() => {
+    var errorMessages = document.getElementById('error-messages');
+    if (errorMessages) {
+        errorMessages.style.display = 'none';
+    }
+}, 5000); // 5 second timeout

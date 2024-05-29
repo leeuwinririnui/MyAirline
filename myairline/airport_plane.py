@@ -7,6 +7,7 @@ django.setup()
 
 from airline.models import Airport, Plane 
 
+# populate database with airport data
 def populate_airports():
     airports_data = [
         {"iCAO": "NZNE", "name": "Dairy Flat Airport", "location": "Dairy Flat", "country": "New Zealand"},
@@ -21,7 +22,7 @@ def populate_airports():
         airport = Airport(**data)
         airport.save()
 
-
+#populate database with plane data
 def populate_planes():
     planes_data = [
         {"name": "SyberJet", "model": "SJ30i", "capacity": 6},

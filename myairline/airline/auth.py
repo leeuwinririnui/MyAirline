@@ -5,7 +5,6 @@ from .models import CustomUser
 
 def login_view(request):
     if request.method == 'POST':
-        # access POST data
 
         # retrieve email
         username = request.POST.get('username', None)
@@ -14,11 +13,13 @@ def login_view(request):
 
         # authenticate user
         user = authenticate(username=username, password=password)
+        # if user exists, log user in and redirect to home page
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            return redirect('login')
+            error_message = "Invalid username or password."
+            return render(request, 'login.html', {'error_message': error_message})
     
     return render(request, 'login.html')
 
@@ -42,17 +43,25 @@ def signup_view(request):
         password = request.POST.get('password', None)
         # retrieve password confirmation
         confirm = request.POST.get('confirm', None)
+
+        error_messages = []
         
         # check to see if user with provided email already exists
         if CustomUser.objects.filter(email=email).exists():
-            # user with this email already exists
-            return render(request, 'contact.html') # temp
-        elif len(email) < 4:
-            return render(request, 'signup.html') # temp
-        elif password != confirm:
-            return render(request, 'signup.html') # temp
-        elif len(password) < 7:
-            return render(request, 'signup.html') # temp
+            error_messages.append("A user with this email already exists.")
+
+        if len(email) < 4:
+            error_messages.append("Email must be at least 4 characters long.")
+
+        if password != confirm:
+            error_messages.append("Passwords do not match.")
+
+        if len(password) < 7:
+            error_messages.append("Password must have 7 or more characters.")
+        
+        # if error return error message
+        if error_messages:
+            return render(request, 'signup.html', {'error_messages': error_messages})
         else:
             # process data and save to database
 
@@ -81,8 +90,10 @@ def signup_view(request):
 
     return render(request, 'signup.html')
 
-def logout_view(request):
+def logout_view(request): 
     if request.method == 'POST':
+        # log user out
         logout(request)
+        # return user to loging screen
         return redirect('login')
     return render(request, 'logout.html')

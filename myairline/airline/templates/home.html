@@ -3,52 +3,80 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-{% if user.is_authenticated %}
-    <h1>Welcome {{ user.first_name }}!</h1>
-{% else %}
-    <h1>Welcome to our website!</h1>
-{% endif %} 
-<p>This is the home page content.</p>
 
 <div class="container">
+    {% if user.is_authenticated %}
+    <h1>Welcome {{ user.first_name }}!</h1>
+    {% else %}
+    <h1>Welcome to our website!</h1>
+    {% endif %} 
+    <p>Explore Our Exciting Destinations</p>
     <div class="row">
         <div class="col-md-4 mb-4">
             <div class="destination-photo">
                 <img src="{% static 'images/sydney.jpg' %}" alt="Destination 1" class="img-fluid">
-                <div class="destination-label">Destination 1</div>
+                <div class="destination-label">Sydney</div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="destination-photo">
                 <img src="{% static 'images/rotorua.jpg' %}" alt="Destination 2" class="img-fluid">
-                <div class="destination-label">Destination 2</div>
+                <div class="destination-label">Rotorua</div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="destination-photo">
-                <img src="destination3.jpg" alt="Destination 3" class="img-fluid">
-                <div class="destination-label">Destination 3</div>
+                <img src="{% static 'images/chathams.jpg' %}" alt="Destination 3" class="img-fluid">
+                <div class="destination-label">Chatham Islands</div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="destination-photo">
-                <img src="destination4.jpg" alt="Destination 4" class="img-fluid">
-                <div class="destination-label">Destination 4</div>
+                <img src="{% static 'images/barrier.jpg' %}" alt="Destination 4" class="img-fluid">
+                <div class="destination-label">Great Barrier Island</div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="destination-photo">
-                <img src="destination5.jpg" alt="Destination 5" class="img-fluid">
-                <div class="destination-label">Destination 5</div>
+                <img src="{% static 'images/tekapo.jpg' %}" alt="Destination 5" class="img-fluid">
+                <div class="destination-label">Lake Tekapo</div>
             </div>
         </div>
         <div class="col-md-4 mb-4">
             <div class="destination-photo">
-                <img src="destination6.jpg" alt="Destination 6" class="img-fluid">
-                <div class="destination-label">Destination 6</div>
+                <img src="{% static 'images/dairy.jpg' %}" alt="Destination 6" class="img-fluid">
+                <div class="destination-label">Dairy Flat</div>
             </div>
         </div>
     </div>
+    {% if user.is_authenticated %}
+    <div class="cta-container bg-primary text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Ready to Start Your Adventure?</h2>
+                    <p>Book your flight now and explore these amazing destinations!</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="{% url 'flights' %}" class="btn btn-light btn-lg">Book Now</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="cta-container bg-primary text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <h2>Ready to Start Your Adventure?</h2>
+                    <p>Create an account to get started!</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="{% url 'signup' %}" class="btn btn-light btn-lg">Sign Up</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
 </div>
 
 {% endblock %}
