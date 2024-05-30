@@ -1,6 +1,6 @@
 FROM python:3.7.1
 
-WORKDIR /code
+WORKDIR /src
 
 RUN pip install Django requests
 
